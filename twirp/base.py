@@ -79,7 +79,7 @@ class TwirpBaseApp(object):
 
     def _get_encoder_decoder(self, endpoint, headers):
         ctype = headers.get('content-type', None)
-        if "application/json" == ctype:
+        if "application/json" == ctype or 'application/json; charset=UTF-8' == ctype:
             decoder = functools.partial(self.json_decoder, data_obj=endpoint.input)
             encoder = functools.partial(self.json_encoder, data_obj=endpoint.output)
         elif "application/protobuf" == ctype:
